@@ -1,2 +1,2 @@
 # product-backend
-The backend for product overview module
+The backend for products 
