@@ -1,0 +1,22 @@
+{
+  "name": "product-backend",
+  "version": "1.0.0",
+  "description": "A server and database to support product interactions on an e-commerce application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "loadStyles": "mongoimport --db ProductsAPI --collection styles --type json --file ./merged_styles.json && mongoimport --db ProductsAPI --collection styles --type json --file ./merged_styles2.json",
+    "loadRelateds": "mongoimport --db ProductsAPI --collection relateds --type json --file ./related.json",
+    "loadProducts": "mongoimport --db ProductsAPI --collection products --type json --file ./merged_products.json"
+  },
+  "author": "rpotter741",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "json2csv": "^6.0.0-alpha.2",
+    "mongoose": "^8.7.3"
+  }
+}
