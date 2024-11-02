@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const filePath = path.join(__dirname, './product_id_logs.json')
-const missingIds = require('./server/dbSchemas/missing_product_ids.js');
+const missingIds = require('../server/dbSchemas/missing_product_ids.js');
 
 // Initialize an empty array to store the logs
 let logs = [];
