@@ -1,0 +1,48 @@
+config:
+  target: "http://localhost:3000/api"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+
+  processor: "./test-two-helper.js"  # Use custom processor for logging
+
+scenarios:
+  - flow:
+      - function: "logProductId"
+      - get:
+          url: "/products/{{ productId }}"
+          capture:
+            - json: "$.productId"       # Capture productId from request
+              as: "productId"
+            - json: "$.statusCode"      # Capture response status code
+              as: "statusCode"
+            - json: "$.responseTime"    # Capture response time
+              as: "responseTime"
+
+  - flow:
+      - function: "logProductId"
+      - get:
+          url: "/products/{{ productId }}/styles"
+          capture:
+            - json: "$.productId"
+              as: "productId"
+            - json: "$.statusCode"
+              as: "statusCode"
+            - json: "$.responseTime"
+              as: "responseTime"
+
+  - flow:
+      - function: "logProductId"
+      - get:
+          url: "/products/{{ productId }}/related"
+          capture:
+            - json: "$.productId"
+              as: "productId"
+            - json: "$.statusCode"
+              as: "statusCode"
+            - json: "$.responseTime"
+              as: "responseTime"
+
+after:
+  flow:
+    - function: "writeLogsToFile"

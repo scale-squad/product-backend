@@ -5,18 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "loadStyles": "mongoimport --db ProductsAPI --collection styles --type json --file ./merged_styles.json && mongoimport --db ProductsAPI --collection styles --type json --file ./merged_styles2.json",
-    "loadRelateds": "mongoimport --db ProductsAPI --collection relateds --type json --file ./related.json",
+    "start": "node ./server/index.js",
+    "loadStyles": "mongoimport --db ProductsAPI --collection styles --type json --file ./output.json",
+    "loadRelateds": "mongoimport --db ProductsAPI --collection relateds --type json --file ./fixedRelated.json",
     "loadProducts": "mongoimport --db ProductsAPI --collection products --type json --file ./merged_products.json"
   },
   "author": "rpotter741",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
     "json2csv": "^6.0.0-alpha.2",
-    "mongoose": "^8.7.3"
+    "mongoose": "^8.7.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7"
   }
 }
