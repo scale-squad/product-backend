@@ -2,11 +2,13 @@ config:
   target: "http://localhost:3000/api"
   phases:
     - duration: 60
-      arrivalRate: 20
-      maxUsers: 1000
-    - duration: 840
-      arrivalRate: 40
-      maxUsers: 1000
+      arrivalRate: 10
+      rampTo: 200
+    - duration: 60
+      arrivalRate: 200
+      rampTo: 1000
+
+
 
 
   processor: "./load-test-help.js"  # Include the JavaScript file
@@ -23,38 +25,7 @@ config:
 
 scenarios:
   - name: "Get Product By Id"
-    weight: 3
     flow:
-    - loop:
       - function: "logProductId"
       - get:
           url: "/products/{{ productId }}"
-      count: 200
-
-  - name: "Get Product Styles"
-    weight: 3
-    flow:
-    - loop:
-      - function: "logProductId"
-      - get:
-          url: "/products/{{ productId }}/styles"
-      count: 200
-
-  - name: "Get Related Products"
-    weight: 3
-    flow:
-    - loop:
-      - function: "logProductId"
-      - get:
-          url: "/products/{{ productId }}/related"
-      count: 200
-
-  - name: "Get Products"
-    weight: 1
-    flow:
-    - loop:
-      - function: "logProductId"
-      - get:
-          url: "/products/?count={{ count }}&page={{ page }}"
-      - think: 3
-      count: 5

@@ -18,7 +18,6 @@ async function processBatch() {
     const startId = (page - 1) * count + 1;
     const endId = startId + count - 1;
 
-    // Check cache for products within the requested range
     let cachedProducts = [];
     let missingProductIds = [];
 
@@ -31,18 +30,15 @@ async function processBatch() {
     }
 
     try {
-      // Query only for missing product IDs
       if (missingProductIds.length > 0) {
         const products = await Product.find({ product_id: { $in: missingProductIds } }, '-_id').exec();
 
-        // Add newly fetched products to cache and response list
         products.forEach(product => {
           productCache.set(product.product_id, product);
           cachedProducts.push(product);
         });
       }
 
-      // Send all cached + newly fetched products in response
       responses.push({ req, data: cachedProducts });
     } catch (error) {
       console.error('Error fetching products in batch: ', error);
