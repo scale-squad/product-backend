@@ -11,7 +11,6 @@ const MAX_BATCH_SIZE = 1000;
 async function processBatch() {
   if (requestQueue.length === 0) return;
 
-  // Gather requests from the queue
   const batch = requestQueue.splice(0, MAX_BATCH_SIZE);
   const productIds = batch.map(req => req.product_id);
 

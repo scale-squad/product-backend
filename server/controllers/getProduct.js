@@ -6,11 +6,9 @@ let isProcessing = false;
 const BATCH_TIMEOUT = 25;
 const MAX_BATCH_SIZE = 1000;
 
-// Function to process the queued requests
 async function processBatch() {
   if (requestQueue.length === 0) return;
 
-  // Gather requests from the queue
   const batch = requestQueue.splice(0, MAX_BATCH_SIZE);
   const productIds = batch.map(req => req.product_id);
 
