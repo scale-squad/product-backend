@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const router = require(path.join(__dirname, './routes.js'));
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.port;
 
 const app = express();
 app.use(express.json());
