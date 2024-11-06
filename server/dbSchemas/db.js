@@ -7,7 +7,7 @@ const uri = process.env.DB_URI;
 const db = async () => {
     try {
         await mongoose.connect(DB_URI, {
-            poolSize: 15
+            poolSize: 100
         });
         console.log('MongoDB successfully connected.')
     } catch (error) {
