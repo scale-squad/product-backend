@@ -3,8 +3,8 @@ const { Product } = require('../dbSchemas/db.js');
 let productCache = new Map();
 let requestQueue = [];
 let isProcessing = false;
-const BATCH_TIMEOUT = 75;
-const MAX_BATCH_SIZE = 375;
+const BATCH_TIMEOUT = 100;
+const MAX_BATCH_SIZE = 1000;
 
 async function processBatch() {
   if (requestQueue.length === 0) return;
@@ -18,6 +18,7 @@ async function processBatch() {
     const productMap = new Map();
     products.forEach(product => {
       productMap.set(product.product_id, product);
+      productCache.set(product.product_id, product);
     });
 
     batch.forEach(req => {
